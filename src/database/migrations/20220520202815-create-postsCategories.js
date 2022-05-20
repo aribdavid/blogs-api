@@ -8,9 +8,9 @@ module.exports = {
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        field: 'userId',
+        field: 'postId',
         references: {
-          model: 'Users',
+          model: 'BlogPosts',
           key: 'id',
         },
       },
