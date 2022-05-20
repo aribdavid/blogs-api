@@ -8,7 +8,6 @@ module.exports = {
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        field: 'postId',
         references: {
           model: 'BlogPosts',
           key: 'id',
@@ -19,7 +18,6 @@ module.exports = {
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        field: 'categoryId',
         references: {
           model: 'Categories',
           key: 'id',
