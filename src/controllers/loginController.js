@@ -1,9 +1,10 @@
-// const { User } = require('../database/models');
+const { User } = require('../database/models');
+const generateToken = require('../utils/generateJWT');
 
-const validateUser = (body, res) => {
-  const { username, password } = body;
+const validateBody = (body, res) => {
+  const { email, password } = body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     res
       .status(400)
       .json({ message: 'Some required fields are missing' });
@@ -13,31 +14,24 @@ const validateUser = (body, res) => {
   return true;
 };
 
-module.exports = validateUser;
+module.exports = async (req, res) => {
+    const { email } = req.body;
 
-// const flibs = async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
-//     if (!validateBody(req.body, res)) return;
+    if (!validateBody(req.body, res)) return;
 
-//     const user = await User.findOne({ where: { username } });
-//     const userData = user.dataValues;
+    const user = await User.findOne({ where: { email } });
+  
+    if (!user) {
+      return res.status(400)
+        .json({ message: 'Invalid fields' });
+    }
+   const userWithNoPassword = {
+    id: user.id,
+    displayName: user.displayName,
+    email: user.email,
+    image: user.image,
+   };
+    const token = generateToken(userWithNoPassword);
 
-//     if (!user || user.password !== password) {
-//       return res
-//         .status(401)
-//         .json({ message: 'Usuário não existe ou senha inválida' });
-//     }
-//     const { password: passDB, ...userWithoutPass } = userData;
-
-//     const token = generateToken(userWithoutPass);
-
-//     return res.status(200).json({ token });
-//   } catch (err) {
-//     return res
-//       .status(500)
-//       .json({ message: 'Erro interno', error: err.message });
-//   }
-// };
-
-// module.exports = flibs;
+     return res.status(200).json({ token });
+};
