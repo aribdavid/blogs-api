@@ -6,6 +6,6 @@ const validateNewUser = require('../middlewares/validateNewUser');
 
 const router = express.Router();
 
-router.post('/user', rescue(validateNewUser), rescue(userController));
+router.post('/user', rescue(validateNewUser), rescue(userController.createNewUser));
 
 module.exports = router;
