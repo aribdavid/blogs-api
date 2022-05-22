@@ -7,6 +7,16 @@ const createNewUser = async (request, response) => {
 
    response.status(201).json({ token });
 };
+
+const getAll = async (request, response) => {
+  const { decodedData } = request;
+
+  const users = await userService.getAll(decodedData, response);
+
+  return response.status(200).json(users);
+};
+
 module.exports = {
   createNewUser,
+  getAll,
 };
