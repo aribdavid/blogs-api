@@ -1,6 +1,7 @@
 const { User } = require('../database/models'); 
- const createError = require('../utils/createError');
+const createError = require('../utils/createError');
 const generateToken = require('../utils/generateJWT');
+const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({
@@ -10,6 +11,17 @@ const getUserByEmail = async (email) => {
   });
 
   return user;
+};
+
+const getAll = async (request, response) => {
+  tokenAuthenticator(request, response);
+  const users = await User.findAll({
+    attributes: {
+      exclude: ['password'],
+    },
+  });
+
+  return users;
 };
 
 const createUser = async (displayName, email, password, image) => {
@@ -31,4 +43,5 @@ const createUser = async (displayName, email, password, image) => {
 
 module.exports = {
   createUser,
+  getAll,
 };    
