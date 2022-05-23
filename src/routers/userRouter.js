@@ -3,7 +3,7 @@ const express = require('express');
 const rescue = require('express-rescue');
 const userController = require('../controllers/userController');
 const validateNewUser = require('../middlewares/validateNewUser');
-const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
+ const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
 
 const router = express.Router();
 

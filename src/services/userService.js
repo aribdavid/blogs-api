@@ -2,10 +2,20 @@ const { User } = require('../database/models');
 const createError = require('../utils/createError');
 const generateToken = require('../utils/generateJWT');
 
-const getUserByEmail = async (email) => {
+const getByEmail = async (email) => {
   const user = await User.findOne({
     where: {
       email,
+    },
+  });
+
+  return user;
+};
+
+const getById = async (id) => {
+  const user = await User.findOne({
+    where: {
+      id,
     },
   });
 
@@ -23,7 +33,7 @@ const getAll = async () => {
 };
 
 const createUser = async (displayName, email, password, image) => {
-  const foundUser = await getUserByEmail(email);
+  const foundUser = await getByEmail(email);
 
   if (foundUser) throw createError(409, 'User already registered');
 
@@ -42,4 +52,5 @@ const createUser = async (displayName, email, password, image) => {
 module.exports = {
   createUser,
   getAll,
+  getById,
 };    
