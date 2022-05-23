@@ -1,7 +1,6 @@
 const { User } = require('../database/models'); 
 const createError = require('../utils/createError');
 const generateToken = require('../utils/generateJWT');
-const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({
@@ -13,8 +12,7 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-const getAll = async (request, response) => {
-  tokenAuthenticator(request, response);
+const getAll = async () => {
   const users = await User.findAll({
     attributes: {
       exclude: ['password'],
