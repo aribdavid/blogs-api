@@ -6,6 +6,6 @@ const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
 
 const router = express.Router();
 
-router.post('/categories', rescue(tokenAuthenticator), rescue(categoryController.createNew));
+router.post('/categories', rescue(tokenAuthenticator), rescue(categoryController.createCategory));
 
 module.exports = router;
