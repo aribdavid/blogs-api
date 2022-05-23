@@ -13,11 +13,13 @@ const getByEmail = async (email) => {
 };
 
 const getById = async (id) => {
-  const user = await User.findOne({
-    where: {
-      id,
+  const user = await User.findByPk(id, {
+    attributes: {
+      exclude: ['password'],
     },
   });
+
+  if (!user) throw createError(404, 'User does not exist');
 
   return user;
 };
