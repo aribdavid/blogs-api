@@ -11,5 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Users',
   });
 
+  User.associate = ({ BlogPost }) => {
+    User.hasMany(BlogPost, {
+      foreignKey: 'id',
+      as: 'blogsPosts',
+      onDelete: 'CASCADE'
+    });
+  }
+
   return User;
 };
