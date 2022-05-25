@@ -4,6 +4,7 @@ const rescue = require('express-rescue');
 const blogPostController = require('../controllers/blogPostController');
 const tokenAuthenticator = require('../middlewares/tokenAuthenticator');
 const validatePost = require('../middlewares/validatePost');
+const validatePostUpdate = require('../middlewares/validatePostUpdate');
 
 const router = express.Router();
 
@@ -14,6 +15,6 @@ router.post('/post',
 
 router.get('/post', rescue(tokenAuthenticator), rescue(blogPostController.getAll));
 router.get('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.getById));
-router.put('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.updatePost));
+router.put('/post/:id', rescue(tokenAuthenticator), rescue(validatePostUpdate), rescue(blogPostController.updatePost));
 
 module.exports = router;
