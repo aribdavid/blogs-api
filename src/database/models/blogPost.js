@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define('BlogPost', {
+  const blogPost = sequelize.define('BlogPost', {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  Category.associate = ({ User }) => {
-    Category.belongsTo(User, {
+  blogPost.associate = ({ User }) => {
+    blogPost.belongsTo(User, {
       foreignKey: 'userId',
       as: 'user',
       onDelete: 'CASCADE'
     });
   }
 
-  return Category;
+  return blogPost;
 } 
