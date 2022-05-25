@@ -13,7 +13,10 @@ router.post('/post',
   rescue(validatePost),
   rescue(blogPostController.createPost));
 router.get('/post', rescue(tokenAuthenticator), rescue(blogPostController.getAll));
+router.get('/post/search', rescue(tokenAuthenticator), rescue(blogPostController.searchPost));
+
 router.get('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.getById));
+
 router.put('/post/:id',
   rescue(tokenAuthenticator),
   rescue(validatePostUpdate),
