@@ -12,4 +12,6 @@ router.post('/post',
   rescue(validatePost),
   rescue(blogPostController.createPost));
 
+router.get('/post', rescue(tokenAuthenticator), rescue(blogPostController.getAll));
+
 module.exports = router;

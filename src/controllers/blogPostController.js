@@ -12,7 +12,7 @@ const createPost = async (request, response) => {
 const getAll = async (_request, response) => {
   const posts = await blogPostService.getAll();
   
-  return response.status(201).json(posts);
+  return response.status(200).json(posts);
 };
 
 module.exports = {
