@@ -68,8 +68,8 @@ const getById = async (id) => {
   return response;
 };
 
-const validateUser = async (email, idPost) => {
-  const post = await BlogPost.findByPk(idPost);
+const validateUser = async (email, postId) => {
+  const post = await BlogPost.findByPk(postId);
   if (!post) throw createError(404, 'Post does not exist');
 
   const user = await userService.getByEmail(email);
@@ -77,27 +77,27 @@ const validateUser = async (email, idPost) => {
   if (user.id !== post.userId) throw createError(401, 'Unauthorized user');
 };
 
-const updatePost = async (email, newPost, idPost) => {
-  await validateUser(email, idPost);
+const updatePost = async (email, newPost, postId) => {
+  await validateUser(email, postId);
 
   await BlogPost
     .update({ title: newPost.title, content: newPost.content }, {
       where: {
-        id: idPost,
+        id: postId,
       },
     });
 
-  const updatedPost = await getById(idPost);
+  const updatedPost = await getById(postId);
 
   return updatedPost;
 };
 
-const deleteUser = async (email) => {
-  const user = await Category.getByEmail(email);
+const deleteUser = async (email, postId) => {
+  await validateUser(email, postId);
 
-  await User.destroy({
+  await BlogPost.destroy({
     where: {
-      id: user.id,
+      id: postId,
     },
   });
 };

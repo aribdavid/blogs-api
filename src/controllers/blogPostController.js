@@ -31,9 +31,19 @@ const updatePost = async (request, response) => {
   return response.status(200).json(updatedPost);
 };
 
+const deletePost = async (request, response) => {
+  const { id } = request.params;
+  const { decodedData } = request;
+
+  await blogPostService.deletePost(decodedData, id);
+
+  return response.status(204).end();
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
   updatePost,
+  deletePost,
 };
