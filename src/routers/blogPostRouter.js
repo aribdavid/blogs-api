@@ -13,5 +13,6 @@ router.post('/post',
   rescue(blogPostController.createPost));
 
 router.get('/post', rescue(tokenAuthenticator), rescue(blogPostController.getAll));
+router.get('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.getById));
 
 module.exports = router;

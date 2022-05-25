@@ -62,6 +62,9 @@ const getById = async (id) => {
       },
     ],
   });
+
+  if (!response) throw createError(404, 'Post does not exist');
+
   return response;
 };
 
