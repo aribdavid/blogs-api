@@ -92,7 +92,7 @@ const updatePost = async (email, newPost, postId) => {
   return updatedPost;
 };
 
-const deleteUser = async (email, postId) => {
+const deletePost = async (email, postId) => {
   await validateUser(email, postId);
 
   await BlogPost.destroy({
@@ -107,5 +107,5 @@ module.exports = {
   getAll,
   getById,
   updatePost,
-  deleteUser,
+  deletePost,
 };

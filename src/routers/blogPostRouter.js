@@ -12,12 +12,12 @@ router.post('/post',
   rescue(tokenAuthenticator),
   rescue(validatePost),
   rescue(blogPostController.createPost));
-
 router.get('/post', rescue(tokenAuthenticator), rescue(blogPostController.getAll));
 router.get('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.getById));
 router.put('/post/:id',
   rescue(tokenAuthenticator),
   rescue(validatePostUpdate),
   rescue(blogPostController.updatePost));
+router.delete('/post/:id', rescue(tokenAuthenticator), rescue(blogPostController.deletePost));
 
 module.exports = router;

@@ -32,8 +32,8 @@ const updatePost = async (request, response) => {
 };
 
 const deletePost = async (request, response) => {
-  const { id } = request.params;
   const { decodedData } = request;
+  const { id } = request.params;
 
   await blogPostService.deletePost(decodedData, id);
 
