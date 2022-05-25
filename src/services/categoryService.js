@@ -8,14 +8,7 @@ const getCategories = async (categories) => {
       id: categories,
     },
   });
-
   return response;
-};
-
-const validateCategories = async (categories) => {
-  const response = await getCategories(categories);
-
-  if (response.length !== categories.length) throw createError(400, '"categoryIds" not found');
 };
 
 const createCategory = async (request) => {
@@ -39,5 +32,5 @@ const getAll = async () => {
 module.exports = {
   createCategory,
   getAll,
-  validateCategories,
+  getCategories,
 };

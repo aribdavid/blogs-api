@@ -16,6 +16,7 @@ app.use(express.json());
 app.use('/', router.user);
 app.use('/', router.login);
 app.use('/', router.category);
+app.use('/', router.blogPost);
 app.use(errorHandler);
 
 // ...

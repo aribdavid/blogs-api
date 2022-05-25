@@ -55,4 +55,5 @@ module.exports = {
   createUser,
   getAll,
   getById,
+  getByEmail,
 };    
