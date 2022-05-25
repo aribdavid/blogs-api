@@ -92,9 +92,20 @@ const updatePost = async (email, newPost, idPost) => {
   return updatedPost;
 };
 
+const deleteUser = async (email) => {
+  const user = await Category.getByEmail(email);
+
+  await User.destroy({
+    where: {
+      id: user.id,
+    },
+  });
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
   updatePost,
+  deleteUser,
 };
