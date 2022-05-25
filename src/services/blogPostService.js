@@ -68,8 +68,33 @@ const getById = async (id) => {
   return response;
 };
 
+const validateUser = async (email, idPost) => {
+  const post = await BlogPost.findByPk(idPost);
+  if (!post) throw createError(404, 'Post does not exist');
+
+  const user = await userService.getByEmail(email);
+
+  if (user.id !== post.userId) throw createError(401, 'Unauthorized user');
+};
+
+const updatePost = async (email, newPost, idPost) => {
+  await validateUser(email, idPost);
+
+  await BlogPost
+    .update({ title: newPost.title, content: newPost.content }, {
+      where: {
+        id: idPost,
+      },
+    });
+
+  const updatedPost = await getById(idPost);
+
+  return updatedPost;
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
+  updatePost,
 };
